@@ -22,4 +22,8 @@ public class ProductDAO {
 		products.add(new Product("elec-131", "Smart Watch", 24, 70.99, "Huaweii"));
 		products.add(new Product("elec-765", "Playstation 4", 9, 420.99, "Sony"));
 	}
+	
+	public List<Product> getProductList() {
+		return this.products;
+	}
 }
