@@ -23,25 +23,25 @@
 <c:forEach items="${sessionScope.products}" var="item">
     <tr>
         <td>
-            <c:out value="${item.getSku()}" />
+            <input type="text" name="sku_${item.getSku()}" value="${item.getSku()}"/>
         </td>
         <td>
-            <c:out value="${item.getDescription()}" />
+            <input type="text" name="description_${item.getSku()}" value="${item.getDescription()}"/>
         </td>
         <td>
-            <c:out value="${item.getNumberInStock()}" />
+            <input type="text" name="numberInStock_${item.getSku()}" value="${item.getNumberInStock()}"/>
         </td>
         <td>
-            <c:out value="${item.getUnitPrice()}" />
+            <input type="text" name="unitPrice_${item.getSku()}" value="${item.getUnitPrice()}"/>
         </td>
         <td>
-            <c:out value="${item.getBrand()}" />
+            <input type="text" name="brand_${item.getSku()}" value="${item.getBrand()}"/>
         </td>
         <td>
-            <input type="text" name="quantity"/>
+            <input type="text" name="quantity_${item.getSku()}"/>
         </td>
         <td>
-           <input type="submit" value="Add to cart"/>
+           <input type="submit" name="buttonSubmit_${item.getSku()}" value="Add to cart" />
         </td>
     </tr>
     </c:forEach>
