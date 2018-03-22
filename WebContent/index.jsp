@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -23,22 +23,22 @@
 <c:forEach items="${sessionScope.products}" var="item">
     <tr>
         <td>
-            <input type="text" name="sku_${item.getSku()}" value="${item.getSku()}"/>
+            <input type="text" name="sku_${item.getSku()}" value="${item.getSku()}" readonly/>
         </td>
         <td>
-            <input type="text" name="description_${item.getSku()}" value="${item.getDescription()}"/>
+            <input type="text" name="description_${item.getSku()}" value="${item.getDescription()}" readonly/>
         </td>
         <td>
-            <input type="text" name="numberInStock_${item.getSku()}" value="${item.getNumberInStock()}"/>
+            <input type="text" name="numberInStock_${item.getSku()}" value="${item.getNumberInStock()}" readonly/>
         </td>
         <td>
-            <input type="text" name="unitPrice_${item.getSku()}" value="${item.getUnitPrice()}"/>
+            <input type="text" name="unitPrice_${item.getSku()}" value="${item.getUnitPrice()}" readonly/>
         </td>
         <td>
-            <input type="text" name="brand_${item.getSku()}" value="${item.getBrand()}"/>
+            <input type="text" name="brand_${item.getSku()}" value="${item.getBrand()}" readonly/>
         </td>
         <td>
-            <input type="text" name="quantity_${item.getSku()}"/>
+            <input type="number" name="quantity_${item.getSku()}"/>
         </td>
         <td>
            <input type="submit" name="buttonSubmit_${item.getSku()}" value="Add to cart" />

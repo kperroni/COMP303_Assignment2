@@ -54,8 +54,30 @@ public class AddToCart extends HttpServlet {
 		List<Product> sessionProducts = (List<Product>) session.getAttribute("products");
 		// Getting selected product
 		for (Product product : sessionProducts) {
-			if(request.getParameter("buttonSubmit_"+product.getSku()) != null) {
-				System.out.println("Product selected is: "+request.getParameter("description_"+product.getSku()));
+			if (request.getParameter("buttonSubmit_" + product.getSku()) != null) {
+				try {
+					int selectedQuantity = Integer.parseInt(request.getParameter("quantity_" + product.getSku()));
+					if (selectedQuantity > 0) {
+						int numStock = product.getNumberInStock();
+						if (numStock >= selectedQuantity) {
+							System.out.println("Product selected is: " + product.getDescription());
+							numStock -= selectedQuantity;
+							product.setNumberInStock(numStock);
+							session.setAttribute(product.getSku() + "_numInCart", selectedQuantity);
+							System.out.println("Remaining stock: " + numStock);
+						} else {
+							System.out.println("Not enough stock of " + product.getDescription() + " remaining!");
+						}
+					} else {
+						System.out.println("No copies of " + product.getDescription() + " selected!");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("Quantity is not a number!");
+				}
+				Integer numInCart = (Integer) session.getAttribute(product.getSku() + "_numInCart");
+				if(numInCart != null) {
+					System.out.println("Number in cart: " + numInCart);
+				}
 			}
 		}
 	}
