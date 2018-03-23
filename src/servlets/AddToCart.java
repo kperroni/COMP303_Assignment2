@@ -58,7 +58,9 @@ public class AddToCart extends HttpServlet {
 				try {
 					int selectedQuantity = Integer.parseInt(request.getParameter("quantity_" + product.getSku()));
 					if (selectedQuantity > 0) {
-						int numStock = product.getNumberInStock();
+						int numStock = product.getNumberInStock(); 
+						 int totalQuantity = product.getQuantity();
+						 product.setQuantity(totalQuantity+selectedQuantity);
 						if (numStock >= selectedQuantity) {
 							System.out.println("Product selected is: " + product.getDescription());
 							numStock -= selectedQuantity;
@@ -67,6 +69,7 @@ public class AddToCart extends HttpServlet {
 							System.out.println("Remaining stock: " + numStock);
 						} else {
 							System.out.println("Not enough stock of " + product.getDescription() + " remaining!");
+							
 						}
 					} else {
 						System.out.println("No copies of " + product.getDescription() + " selected!");
@@ -77,6 +80,8 @@ public class AddToCart extends HttpServlet {
 				Integer numInCart = (Integer) session.getAttribute(product.getSku() + "_numInCart");
 				if(numInCart != null) {
 					System.out.println("Number in cart: " + numInCart);
+					response.sendRedirect("http://localhost:8080/KennyWesleyManoel_COMP303_Assignment2/cartContent.jsp");
+					
 				}
 			}
 		}

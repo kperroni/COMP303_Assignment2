@@ -8,14 +8,16 @@ public class Product {
 	private int numberInStock;
 	private double unitPrice;
 	private String brand;
+	private int quantity;
 	
 	// Constructor
-	public Product(String sku, String description, int numberInStock, double unitPrice, String brand) {
+	public Product(String sku, String description, int numberInStock, double unitPrice, String brand,int quantity) {
 		this.sku = sku;
 		this.description = description;
 		this.numberInStock = numberInStock;
 		this.unitPrice = unitPrice;
 		this.brand = brand;
+		this.quantity= quantity;
 	}
 
 	// Getters and Setters
@@ -57,5 +59,13 @@ public class Product {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+	
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public int getQuantity() {
+		return quantity;
 	}
 }
