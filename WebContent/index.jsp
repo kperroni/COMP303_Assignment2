@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Index</title>
 </head>
 <body>
+<span style="color:red;">${message}</span>
 <form method="post" action="AddToCart">
 <h1>Welcome to the E-Shop</h1>
 <h3>Select the items that you want for your shopping cart</h3>

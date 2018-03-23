@@ -50,6 +50,8 @@ public class AddToCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String message = "";
+		request.setAttribute("message", message);
 		HttpSession session = request.getSession();
 		List<Product> sessionProducts = (List<Product>) session.getAttribute("products");
 		// Getting selected product
@@ -58,30 +60,33 @@ public class AddToCart extends HttpServlet {
 				try {
 					int selectedQuantity = Integer.parseInt(request.getParameter("quantity_" + product.getSku()));
 					if (selectedQuantity > 0) {
-						int numStock = product.getNumberInStock(); 
-						 int totalQuantity = product.getQuantity();
-						 product.setQuantity(totalQuantity+selectedQuantity);
+						int numStock = product.getNumberInStock();
+						int totalQuantity = product.getQuantity();
+						product.setQuantity(totalQuantity + selectedQuantity);
 						if (numStock >= selectedQuantity) {
-							System.out.println("Product selected is: " + product.getDescription());
 							numStock -= selectedQuantity;
 							product.setNumberInStock(numStock);
 							session.setAttribute(product.getSku() + "_numInCart", selectedQuantity);
-							System.out.println("Remaining stock: " + numStock);
 						} else {
-							System.out.println("Not enough stock of " + product.getDescription() + " remaining!");
-							
+							message = "Not enough stock of " + product.getDescription() + " remaining!";
+							request.setAttribute("message", message);
+							request.getRequestDispatcher("index.jsp").forward(request, response);
 						}
 					} else {
-						System.out.println("No copies of " + product.getDescription() + " selected!");
+						message = "No copies of " + product.getDescription() + " selected!";
+						request.setAttribute("message", message);
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 				} catch (NumberFormatException e) {
-					System.out.println("Quantity is not a number!");
+					message = "Quantity is not a number!";
+					request.setAttribute("message", message);
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 				Integer numInCart = (Integer) session.getAttribute(product.getSku() + "_numInCart");
-				if(numInCart != null) {
+				if (numInCart != null) {
 					System.out.println("Number in cart: " + numInCart);
-					response.sendRedirect("http://localhost:8080/KennyWesleyManoel_COMP303_Assignment2/cartContent.jsp");
-					
+					response.sendRedirect("/KennyWesleyManoel_COMP303_Assignment2/cartContent.jsp");
+
 				}
 			}
 		}

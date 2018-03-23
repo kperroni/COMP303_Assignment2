@@ -38,7 +38,8 @@ tr:nth-child(even){background-color: #f2f2f2}
     
 
 <c:forEach items="${sessionScope.products}" var="item" >
-<c:if test="${item.getQuantity() > 0}">
+<c:set var="numInCart" value="${item.getSku()}_numInCart" />
+<c:if test="${sessionScope[numInCart] > 0}">
     <tr>
         <td>
             <c:out value="${item.getSku()}"> </c:out>
@@ -50,11 +51,11 @@ tr:nth-child(even){background-color: #f2f2f2}
             <c:out value="${item.getUnitPrice()}" > </c:out>
         </td>
         <td>
-            <c:out value="${item.getQuantity()}" > </c:out>
+            <c:out value="${sessionScope[numInCart]}" > </c:out>
         </td>
         <td>
         <fmt:setLocale value = "en_US"/>
-        <fmt:formatNumber value ="${item.getQuantity()*item.getUnitPrice()}" type = "currency"/>
+        <fmt:formatNumber value ="${sessionScope[numInCart]*item.getUnitPrice()}" type = "currency"/>
             
         </td>
     </tr>
@@ -69,10 +70,11 @@ tr:nth-child(even){background-color: #f2f2f2}
     <td>
     <c:set var="total" value="${0}"/>
 	<c:forEach var="totalItem" items="${sessionScope.products}">
-	<c:set var="total" value="${total+totalItem.getQuantity()*totalItem.getUnitPrice()}" />
+	<c:set var="numInCart" value="${totalItem.getSku()}_numInCart" />
+	<c:set var="total" value="${total+sessionScope[numInCart]*totalItem.getUnitPrice()}" />
 	</c:forEach>  
 	<fmt:setLocale value = "en_US"/>
-        <fmt:formatNumber value ="${total}" type = "currency"/>
+        <fmt:formatNumber value="${total}" type = "currency"/>
 
 	</td>   
     </tr>
